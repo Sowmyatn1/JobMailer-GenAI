@@ -31,7 +31,7 @@ Requests: For making HTTP requests to Zapier for email sending
 python-dotenv: For loading environment variables from a .env file
 
 
-System diagram
+
 ![System Diagram](Jobmailer1.drawio.png)
 
 # Setup
