@@ -118,7 +118,7 @@ def GenerateInterviewQuestions(job_description,resume_text=""):
 
 def send_email_via_zapier(email_data):
     print("Send email data to Zapier webhook.")
-    zapier_webhook_url = "https://hooks.zapier.com/hooks/catch/22044714/2lxvzgq/"
+    zapier_webhook_url = os.getenv("WebhookURL")
 
     try:
         response = requests.post(zapier_webhook_url, json=email_data)
