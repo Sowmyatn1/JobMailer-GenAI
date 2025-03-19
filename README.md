@@ -30,7 +30,7 @@ PyPDF2: For extracting text from PDF files (resume upload feature)
 Requests: For making HTTP requests to Zapier for email sending
 python-dotenv: For loading environment variables from a .env file
 
-
+# System Diagram
 
 ![System Diagram](Jobmailer1.drawio.png)
 
