@@ -1,8 +1,6 @@
 import streamlit as st
 from openai import OpenAI
 import os
-import sys
-import io
 from dotenv import load_dotenv
 import PyPDF2
 import requests
@@ -25,7 +23,14 @@ if api_key is None:
 
 client = OpenAI(api_key=api_key)
 
+if "user_input" not in st.session_state:
+    st.session_state.user_input = ""
 
+if "generated_email" not in st.session_state:
+    st.session_state.generated_email = ""
+
+if "to_emailid" not in st.session_state:
+    st.session_state.to_emailid = ""
 
 def extract_text_from_resume(uploaded_file):
     """Extract text from a PDF resume."""
@@ -122,6 +127,7 @@ def send_email_via_zapier(email_data):
 
     try:
         response = requests.post(zapier_webhook_url, json=email_data)
+        print(f"response from zapier is :{response}" )
         if response.status_code == 200:
             st.success("✅ Email sent successfully!")
         else:
@@ -165,14 +171,8 @@ if st.button("Generate Email"):
     else:
         with st.spinner("Generating your email..."):
             try:
-                generated_email = GenerateEmailFromOpenAI( st.session_state.user_input,email_tone,email_length,email_purpose,resume_text)
-                st.session_state.generated_email=generated_email
-                st.markdown(f"### ✉️ Generated Email")
-                st.markdown(f"**Tone:** {email_tone}")
-                st.markdown(f"**Length:** {email_length}")
-                st.markdown(f"---")
-                
-                st.write(generated_email)
+                st.session_state.generated_email = GenerateEmailFromOpenAI( st.session_state.user_input,email_tone,email_length,email_purpose,resume_text)
+
  
             except Exception as e:
                 st.error("⚠️ Error generating email. Please try again.")
@@ -182,8 +182,15 @@ if st.button("Generate Email"):
                 #st.markdown(f"Thanks and Regards [Name]")
 
 
-
-st.session_state.to_emailid= st.text_input("Enter Email ID")
+#st.session_state.generated_email=generated_email
+st.markdown(f"### ✉️ Generated Email")
+st.markdown(f"**Tone:** {email_tone}")
+st.markdown(f"**Length:** {email_length}")
+st.markdown(f"---")
+# Editable text area for modifying email
+st.session_state.generated_email = st.text_area("Edit Email Before Sending:", value=st.session_state.generated_email, height=250)
+#st.write(generated_email)
+st.session_state.to_emailid= st.text_input("Enter Email ID",value=st.session_state.to_emailid)
 
 if st.button("Send Email"):
     print("inside send email")
