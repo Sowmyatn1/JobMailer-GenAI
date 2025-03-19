@@ -1,0 +1,9 @@
+openai
+streamlit
+PyPDF2
+langchain
+langchain-community
+sqlalchemy
+python-dotenv
+urllib3
+requests
