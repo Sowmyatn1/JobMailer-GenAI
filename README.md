@@ -3,6 +3,9 @@
 
 JobMailer AI is a streamlined application designed to generate professional emails and interview questions using GPT-3.5, OpenAI's language model. It utilizes Streamlit for the user interface and integrates with Zapier for email delivery. This tool simplifies the process of creating job application emails and interview questions by leveraging AI, saving time for job seekers and recruiters alike.
 
+# Youtube Link
+https://www.youtube.com/watch?v=CL77IcpNhqo
+
 # Features
 Email Generation:
 
